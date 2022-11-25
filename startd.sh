@@ -15,6 +15,7 @@ fi
 
 docker build --rm=true -t ual-jupyter-test:latest -f jupyter/Dockerfile . || exit 1
 
+# Initial build may take a few minutes and hundreds of MB of downloads
 env GID=$(id -g) UID=$(id -u) \
 docker run \
     --user root \
@@ -25,6 +26,3 @@ docker run \
     --name "jupyter-testing" \
     -v "$(pwd)/notebooks:/usr/src/notebooks" \
     ual-jupyter-test:latest
-    # -it --entrypoint /bin/bash \
-
-echo $(docker port jupyter-testing)
