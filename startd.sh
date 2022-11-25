@@ -16,8 +16,10 @@ fi
 docker build --rm=true -t ual-jupyter-test:latest -f jupyter/Dockerfile . || exit 1
 
 env GID=$(id -g) UID=$(id -u) \
-docker run -d \
+docker run \
     --user root \
+    -e UID=${UID} \
+    -e GID=${GID} \
     --publish 127.0.0.1:8888:8888 \
     --publish 127.0.0.1:8080:8080 \
     --name "jupyter-testing" \
