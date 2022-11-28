@@ -4,6 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 
+[scripts]
+retrieve-packages = "bash ./notebooks/packages/retrieve-packages.sh"
+
+
 [dev-packages]
 pylint = "*"
 

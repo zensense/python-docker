@@ -14,10 +14,11 @@ EXPOSE 8888
 EXPOSE 8080
 
 RUN apt-get update --yes && apt-get upgrade --yes
-RUN apt-get install wget --yes
+RUN apt-get install wget git --yes
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src
+RUN chown -R ${UID}:${GID} .
 
 ADD ./jupyter/Pipfile /usr/src
 
