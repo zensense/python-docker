@@ -1,2 +1,7 @@
 notebooks/packages/*
 !notebooks/packages/retrieve-packages.sh
+
+notebooks/files/incoming/*
+notebooks/files/outgoing/*
+!notebooks/files/incoming/.gitkeep
+!notebooks/files/outgoing/.gitkeep

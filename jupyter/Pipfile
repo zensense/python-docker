@@ -27,6 +27,10 @@ ipykernel = "*"
 seaborn = "*"
 pypandoc = "*"
 ipywidgets = "*"
+wand = "*"
+pillow = "*"
+pymupdf = "*"
+pypdf2 = "*"
 
 
 [requires]
