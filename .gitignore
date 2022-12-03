@@ -1,3 +1,5 @@
+.venv/
+
 notebooks/packages/*
 !notebooks/packages/retrieve-packages.sh
 

@@ -16,6 +16,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # specific Python stuff...
 # create pipenv venv in the current directory
 # use .local dir for user pipenv settings
+ENV DISPLAY=:0.0
 ENV PIPENV_VENV_IN_PROJECT=1
 ENV PYTHONUSERBASE="${USER_DIR}/.local"
 ENV PATH="${PATH}:${PYTHONUSERBASE}/bin"
@@ -25,6 +26,7 @@ EXPOSE 8888
 EXPOSE 8080
 EXPOSE 22
 
+# we don't need any of the typical package info messages
 RUN echo 'APT::Install-Suggests "0";' >> /etc/apt/apt.conf.d/00-docker
 RUN echo 'APT::Install-Recommends "0";' >> /etc/apt/apt.conf.d/00-docker
 
@@ -71,19 +73,23 @@ RUN chmod u+rwx,go-rwx "${USER_DIR}/.ssh"
 # finish non-root user tasks
 RUN mkdir "${USER_DIR}/.local"
 RUN chown -R $USER:$USER $USER_DIR
-
-ADD ./jupyter/Pipfile $PROJECT_DIR
 RUN chown -R $USER:$USER $PROJECT_DIR
 
 RUN pip3 install wheel
 RUN pip3 install --upgrade pip
 RUN pip3 install pipenv
 
+# bug in pipenv: https://github.com/pypa/pipenv/issues/5052
+RUN rm -rf $(pipenv --venv)
+
 # finish up image build in the project dir as the non-root user
 WORKDIR $PROJECT_DIR
 USER $USER
 
-RUN pipenv install --system --skip-lock --dev
+ADD Pipfile ./Pipfile
+# run lock in case we have an update to the Pipfile deps
+RUN pipenv lock
+RUN pipenv install --system --deploy
 # install individual packages here, but use discrimination as this will be committed
 # RUN pipenv install py-pdf-parser[dev]
 

@@ -21,7 +21,7 @@ docker run --rm -i -t \
     -e GID=${GID} \
     -p 127.0.0.1:8888:8888 \
     -p 127.0.0.1:8080:8080 \
-    -v "$(pwd)/notebooks:/usr/src/notebooks" \
+    -v "$(pwd):/usr/src" \
     -v /run/host-services/ssh-auth.sock:/ssh-agent \
     -e SSH_AUTH_SOCK="/ssh-agent" \
     -e SSH_DIR="/home/${USER_NAME}/.ssh" \
