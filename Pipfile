@@ -29,6 +29,7 @@ pillow = "*"
 pypdf2 = "*"
 pysimplegui = "*"
 pymupdf = "*"
+pdfreader = "*"
 
 [requires]
 python_version = "3.10"

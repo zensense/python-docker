@@ -44,7 +44,9 @@ RUN apt-get install -qy \
     python3-pip \
     python3-tk \
     libmagickwand-dev \
-    openssh-server 
+    openssh-server \
+    poppler-utils \
+    jbig2dec
 
 # this stuff gets trashed to keep the image weight down. super-necessary!
 RUN apt-get autoremove -y \
