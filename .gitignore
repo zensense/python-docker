@@ -7,3 +7,4 @@ notebooks/files/incoming/*
 notebooks/files/outgoing/*
 !notebooks/files/incoming/.gitkeep
 !notebooks/files/outgoing/.gitkeep
+.Trash-1000
